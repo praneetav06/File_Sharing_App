@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "./App.css";
+import { uploadFile } from "./service/api";
 
 function App() {
   const [file, setFile] = useState(null);
@@ -13,11 +14,15 @@ function App() {
   //api call with data
   useEffect(() => {
     const apiCall = () => {
-      //call the api to upload
-      const fileData = new FormData();
-      fileData.append("name", file.name);
-      fileData.append("file", file);
-      // call the function from api.js with fileData
+      if (file) {
+        // executes if the file exists
+        //call the api to upload
+        const fileData = new FormData();
+        fileData.append("name", file.name);
+        fileData.append("file", file);
+        // call the function from api.js with fileData
+        const response = uploadFile(fileData);
+      }
     };
     apiCall();
   }, [file]);
