@@ -1,4 +1,4 @@
-const uploadController = async (req, res) => {
+export const uploadController = async (req, res) => {
   try {
     // functionality to upload file
     console.log(req.file);
@@ -15,4 +15,15 @@ const uploadController = async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 };
-export default uploadController;
+
+export const DownloadController = async (req, res) => {
+  try {
+    const file = await fileModel.findById(req.params.fileId);
+    if (!file) {
+      return res.status(404).json({ message: "File not found!" });
+    }
+    res.download(file.path, file.name);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
