@@ -1,5 +1,5 @@
 import express from "express";
-import uploadController from "../controllers/uploadController";
+import { uploadController } from "../controllers/uploadController.js";
 import { DownloadController } from "../controllers/uploadController";
 import storage from "../middlewares/upload";
 
