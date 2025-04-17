@@ -4,6 +4,7 @@ import { uploadFile } from "./service/api";
 
 function App() {
   const [file, setFile] = useState(null);
+  const [res, setRes] = useState(null);
   const uploadRef = useRef();
 
   //opens file picker when upload button is clicked
@@ -13,7 +14,7 @@ function App() {
   // console.log(file);
   //api call with data
   useEffect(() => {
-    const apiCall = () => {
+    const apiCall = async () => {
       if (file) {
         // executes if the file exists
         //call the api to upload
@@ -21,7 +22,8 @@ function App() {
         fileData.append("name", file.name);
         fileData.append("file", file);
         // call the function from api.js with fileData
-        const response = uploadFile(fileData);
+        const response = await uploadFile(fileData);
+        setRes(response.path);
       }
     };
     apiCall();
@@ -44,6 +46,9 @@ function App() {
           style={{ display: "none" }}
           onChange={(event) => setFile(event.target.files[0])}
         />
+      </div>
+      <div>
+        <a href="{res}">{res}</a>
       </div>
     </div>
   );
