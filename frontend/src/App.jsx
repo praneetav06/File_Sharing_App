@@ -23,7 +23,7 @@ function App() {
         fileData.append("file", file);
         // call the function from api.js with fileData
         const response = await uploadFile(fileData);
-        setRes(response?.path);
+        setRes(response.path);
       }
     };
     apiCall();
@@ -48,7 +48,7 @@ function App() {
         />
       </div>
       <div>
-        <a href={res}>{res}</a>
+        <a href="{res}">{res}</a>
       </div>
     </div>
   );

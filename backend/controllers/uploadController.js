@@ -1,4 +1,4 @@
-import fileModel from "../models/fileModel";
+import fileModel from "../models/fileModel.js";
 export const uploadController = async (req, res) => {
   try {
     // functionality to upload file
