@@ -1,6 +1,11 @@
 import fileModel from "../models/fileModel.js";
+import path from "path";
+import dotenv from "dotenv";
 export const uploadController = async (req, res) => {
   try {
+    dotenv.config();
+    const backendURL = process.env.BACKEND_URL;
+
     // functionality to upload file
     console.log(req.file);
     const fileObject = {
@@ -9,9 +14,7 @@ export const uploadController = async (req, res) => {
     };
     const file = await fileModel.create(fileObject);
     console.log(file);
-    return res
-      .status(200)
-      .json({ path: `http://localhost:9000/files/${file._id}` });
+    return res.status(200).json({ path: `${backendURL}/files/${file._id}` });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
