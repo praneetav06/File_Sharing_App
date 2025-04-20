@@ -1,6 +1,7 @@
 export const uploadFile = async (fileData) => {
   try {
-    const response = await fetch("http://localhost:9000/upload", {
+    const backendURL = import.meta.env.VITE_BACKEND_URl;
+    const response = await fetch(`${backendURL}/upload`, {
       method: "POST",
       body: fileData,
     });
